@@ -18,7 +18,7 @@ gem "decidim-peertube"
 And then execute:
 
 ```bash
-bundle
+bundle exec rake decidim_peertube:install:migrations && bundle exec rake db:migrate
 ```
 
 ## Contributing
