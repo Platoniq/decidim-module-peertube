@@ -2,4 +2,3 @@
 
 require "decidim/core/test/factories"
 require "decidim/peertube/test/factories"
-

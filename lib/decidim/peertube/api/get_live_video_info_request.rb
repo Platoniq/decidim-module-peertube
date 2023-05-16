@@ -10,7 +10,7 @@ module Decidim
           get_authenticated(
             token,
             "videos/live/#{video_id}"
-          # where <video-id> is either id (integer) or UUIDv4 (string) or shortUUID (string)
+            # where <video-id> is either id (integer) or UUIDv4 (string) or shortUUID (string)
           )
 
           # retrieves streaming data for video, e.g.:
