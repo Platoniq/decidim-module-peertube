@@ -9,7 +9,7 @@ require "decidim/peertube/engine"
 require "decidim/peertube/component"
 
 module Decidim
-  module DecidimPeertube
+  module Peertube
     include ActiveSupport::Configurable
 
     def self.url(path)

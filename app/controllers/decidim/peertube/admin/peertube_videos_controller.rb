@@ -31,12 +31,12 @@ module Decidim
 
           Decidim::Peertube::CreateLiveVideo.call(@form, current_peertube_user, current_component) do
             on(:ok) do
-              flash[:notice] = I18n.t("peertube_videos.create.success", scope: "decidim.decidim_peertube.admin")
+              flash[:notice] = I18n.t("peertube_videos.create.success", scope: "decidim.peertube.admin")
               redirect_to root_path # change to edit_component_path
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t("peertube_videos.create.invalid", scope: "decidim.decidim_peertube.admin")
+              flash.now[:alert] = I18n.t("peertube_videos.create.invalid", scope: "decidim.peertube.admin")
               render action: "new"
             end
           end
@@ -47,7 +47,7 @@ module Decidim
 
           Decidim::Peertube::DestroyVideo.call(peertube_video, current_peertube_user) do
             on(:ok) do
-              flash[:notice] = I18n.t("peertube_videos.destroy.success", scope: "decidim.decidim_peertube.admin")
+              flash[:notice] = I18n.t("peertube_videos.destroy.success", scope: "decidim.peertube.admin")
               redirect_to root_path
             end
           end
@@ -58,7 +58,7 @@ module Decidim
 
           Decidim::Peertube::SelectVideo.call(peertube_video) do
             on(:ok) do
-              flash[:notice] = I18n.t("peertube_videos.select.success", scope: "decidim.decidim_peertube.admin")
+              flash[:notice] = I18n.t("peertube_videos.select.success", scope: "decidim.peertube.admin")
               redirect_to root_path
             end
           end

@@ -19,12 +19,12 @@ module Decidim
 
           Decidim::Peertube::Authenticate.call(@form, current_user) do
             on(:ok) do
-              flash[:notice] = I18n.t("peertube_sessions.create.success", scope: "decidim.decidim_peertube.admin")
+              flash[:notice] = I18n.t("peertube_sessions.create.success", scope: "decidim.peertube.admin")
               redirect_to root_path
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t("peertube_sessions.create.invalid", scope: "decidim.decidim_peertube.admin")
+              flash.now[:alert] = I18n.t("peertube_sessions.create.invalid", scope: "decidim.peertube.admin")
               render action: "new"
             end
           end
@@ -35,7 +35,7 @@ module Decidim
 
           current_peertube_user.destroy!
 
-          flash.now[:notice] = I18n.t("peertube_sessions.destroy.success", scope: "decidim.decidim_peertube.admin")
+          flash.now[:notice] = I18n.t("peertube_sessions.destroy.success", scope: "decidim.peertube.admin")
 
           redirect_to root_path
         end
