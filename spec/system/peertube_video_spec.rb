@@ -10,6 +10,8 @@ describe "Visit a peertube video component", type: :system, perform_enqueued: tr
 
   before do
     switch_to_host(organization.host)
+    visit decidim.root_path
+    page.execute_script("$('#dc-modal-accept').click()")
     visit Decidim::EngineRouter.main_proxy(component).root_path
   end
 
