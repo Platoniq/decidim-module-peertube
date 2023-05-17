@@ -45,7 +45,7 @@ describe "Visit the admin page", type: :system do
 
     let(:headers) do
       {
-        "Authorization": "Bearer #{access_token}"
+        Authorization: "Bearer #{access_token}"
       }
     end
 
@@ -93,7 +93,7 @@ describe "Visit the admin page", type: :system do
 
       let(:headers) do
         {
-          "Authorization": "Bearer #{access_token}"
+          Authorization: "Bearer #{access_token}"
         }
       end
 
@@ -142,6 +142,8 @@ describe "Visit the admin page", type: :system do
       end
 
       it "allows to select a live video and embed it in public component" do
+        visit decidim.root_path
+        page.execute_script("$('#dc-modal-accept').click()")
         visit main_component_path(component)
         expect(page.find("iframe")[:src]).to eq(embed_url)
 

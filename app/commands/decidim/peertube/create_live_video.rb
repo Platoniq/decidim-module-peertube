@@ -3,7 +3,7 @@
 module Decidim
   module Peertube
     # A command with the business logic for creting a live video in Peertube
-    class CreateLiveVideo < Rectify::Command
+    class CreateLiveVideo < Decidim::Command
       # Public: Initializes the command.
       #
       # form         - A form object with the params.
