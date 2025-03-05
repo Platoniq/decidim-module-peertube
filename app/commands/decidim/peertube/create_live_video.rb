@@ -47,7 +47,7 @@ module Decidim
 
         create_live_video_request = Decidim::Peertube::Api::CreateLiveVideoRequest.new(
           token: current_peertube_user.access_token,
-          params: params
+          params:
         )
 
         # TODO: handle possible error if response["video"].blank?
@@ -76,7 +76,7 @@ module Decidim
           live_video_info_request.response["streamKey"]
         ].join("/")
 
-        @peertube_video.update!(rtmp_url: rtmp_url)
+        @peertube_video.update!(rtmp_url:)
       end
     end
   end

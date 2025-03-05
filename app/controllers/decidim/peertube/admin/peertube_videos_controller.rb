@@ -15,14 +15,14 @@ module Decidim
           # enforce_permission_to :show, :peertube_video
         end
 
-        def edit
-          # enforce_permission_to :update, :peertube_video
-        end
-
         def new
           # enforce_permission_to :create, :peertube_video
 
           @form = Decidim::Peertube::PeertubeVideoForm.new
+        end
+
+        def edit
+          # enforce_permission_to :update, :peertube_video
         end
 
         def create

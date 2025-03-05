@@ -3,8 +3,8 @@
 require "spec_helper"
 require "decidim/peertube/test/shared_contexts"
 
-describe "Visit a peertube video component", type: :system, perform_enqueued: true do
-  let(:organization) { create :organization, available_locales: [:en] }
+describe "Visit a peertube video component", :perform_enqueued do
+  let(:organization) { create(:organization, available_locales: [:en]) }
 
   include_context "with an embed peertube_video component"
 
@@ -16,7 +16,7 @@ describe "Visit a peertube video component", type: :system, perform_enqueued: tr
   end
 
   it "renders the peertube video component page" do
-    expect(page).to have_selector("iframe")
+    expect(page).to have_css("iframe")
     expect(page).to have_content(component.settings.title)
     expect(page.find("iframe")[:src]).to eq(component.settings.video_url.gsub("watch", "embed"))
   end

@@ -9,8 +9,8 @@ module Decidim
             "users/token",
             grant_type: "password",
             response_type: "code",
-            username: username,
-            password: password
+            username:,
+            password:
           )
         end
 

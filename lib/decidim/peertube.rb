@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_string_literal: true
-
 require "decidim/peertube/admin"
 require "decidim/peertube/admin_engine"
 require "decidim/peertube/api"
