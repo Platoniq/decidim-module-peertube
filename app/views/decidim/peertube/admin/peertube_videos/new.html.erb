@@ -1,4 +1,4 @@
-<div class="item__edit-form">  
+<div class="item__edit-form">
   <%= decidim_form_for @form, html: { class: "form-defaults form" } do |f| %>
     <div class="card">
       <div class="card-section">
@@ -17,13 +17,7 @@
               </div>
               <div class="row column">
                 <div class="field">
-                  <%= f.select :privacy, [
-                    [t(".privacy_types.public"), 1],
-                    [t(".privacy_types.unlisted"), 2]
-                  ],
-                              label: t(".privacy"),
-                              selected: 2,
-                              prompt: "" %>
+                  <%= f.select :privacy, [[t(".privacy_types.public"), 1], [t(".privacy_types.unlisted"), 2]], label: t(".privacy"), selected: 2, prompt: "" %>
                   <p class="help-text">
                     <%= t(".privacy_help") %>
                   </p>

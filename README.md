@@ -29,11 +29,11 @@ To enable this functionality you have to follow these steps:
    ```
 2. Configure the following environment variables for the module.
    
-   PEERTUBE_HOST: Host of your Peertube instance.
+   **PEERTUBE_HOST**: Host of your Peertube instance.
 
-   PEERTUBE_CLIENT_ID: Client id obtained on previous step.
+   **PEERTUBE_CLIENT_ID**: Client id obtained on previous step.
 
-   PEERTUBE_CLIENT_SECRET: Client secret obtained on previous step.
+   **PEERTUBE_CLIENT_SECRET**: Client secret obtained on previous step.
 
 3. Go to the component and click on Link Peertube Account. Login with an account from the Peertube instance configured, using email and password.
 
