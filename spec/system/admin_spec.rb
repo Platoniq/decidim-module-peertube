@@ -125,7 +125,6 @@ describe "Visit the admin page" do
         expect(page).to have_content "Copy the Stream URL below"
         expect(page).to have_content "Don't share the Stream URL"
 
-        expect(page).to have_content "Don't share kjbkbhbjhbhjjhb Stream URL"
         expect(page).to have_link "Watch in Peertube", href: video_external_url
         expect(page).to have_link "Embed this video in the component", href: select_peertube_video_path
         expect(page).to have_link "Delete", href: destroy_peertube_video_path
