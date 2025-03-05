@@ -36,29 +36,31 @@
       <h2 class="card-title">
         <%= t(".account") %>
       </h2>
-      <div class="button--title pt-4 pb-4">
-        <%= link_to peertube_sessions_path, method: :delete, class: "button button__sm button__secondary" do %>
-          <%= icon "close-circle-line" %>
-          <%= t(".remove_account") %>
-        <% end %>
-      </div>
-      <div class="button--title pb-4">
-        <%= link_to new_peertube_session_path, class: "button button__sm button__secondary" do %>
-          <%= icon "account-circle-line" %>
-          <%= t(".change_account") %>
-        <% end %>
-      </div>
+        <div class="flex pt-4 pb-4">
+          <div class="button--title pr-4">
+            <%= link_to peertube_sessions_path, method: :delete, class: "button button__sm button__secondary" do %>
+              <%= icon "close-circle-line" %>
+              <%= t(".remove_account") %>
+            <% end %>
+          </div>
+          <div class="button--title">
+            <%= link_to new_peertube_session_path, class: "button button__sm button__secondary" do %>
+              <%= icon "account-circle-line" %>
+              <%= t(".change_account") %>
+            <% end %>
+          </div>
+        </div>
     </div>
     <div class="card-section">
       <dl>
         <dt>
-          <%= t(".username") %>:
+          <h2 class="card-title"><%= t(".username") %>:</h2>
         </dt>
         <dd>
           <%= current_peertube_user.peertube_username %>
         </dd>
         <dt>
-          <%= t(".channels") %>:
+          <h2 class="card-title pt-4"><%= t(".channels") %>:</h2>
         </dt>
         <dd>
           <%= render partial: "channels" %>
