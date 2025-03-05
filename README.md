@@ -7,11 +7,45 @@ Peertube implementation for Decidim.
 Peertube will be available as a Component for a Participatory
 Space.
 
-Through this Component you will be able to link an Peertube account 
-![admin_peertube.png](examples%2Fadmin_peertube.png)
-and embed a Peertube video.
+Through this Component you will be able to embed a Peertube video.
+
 ![admin_embed_peertube_video.png](examples%2Fadmin_embed_peertube_video.png)
+
 ![preview_peertube_component.png](examples%2Fpreview_peertube_component.png)
+
+You can also link a Peertube instance account to your Decidim user. This would allow you to start live stream videos.
+
+To enable this functionality you have to follow these steps:
+
+1. Retrieve a client id and secret from your instance.
+
+   You can request it using a terminal, as shown at [PeerTube REST API quick start](https://docs.joinpeertube.org/api-rest-reference.html#tag/Session/operation/getOAuthClient).
+
+   ```bash
+   API="https://instance-host/api/v1"
+
+   ## AUTH
+   curl -s "$API/oauth-clients/local"
+   ```
+2. Configure the following environment variables for the module.
+   
+   PEERTUBE_HOST: Host of your Peertube instance.
+
+   PEERTUBE_CLIENT_ID: Client id obtained on previous step.
+
+   PEERTUBE_CLIENT_SECRET: Client secret obtained on previous step.
+
+3. Go to the component and click on Link Peertube Account. Login with an account from the Peertube instance configured, using email and password.
+
+![peertube_login.png](examples%2Fpeertube_login.png)
+
+Then you should be able to see your Peertube account information.
+
+![admin_peertube.png](examples%2Fadmin_peertube.png)
+
+And to create a live video.
+
+![live_video.png](examples%2Flive_video.png)
 
 ## Installation
 
