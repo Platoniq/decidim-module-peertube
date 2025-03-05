@@ -1,18 +1,24 @@
 <div class="card">
   <div class="card-divider flex">
-    <%= link_to main_component_path(current_component), class: "button m-s", target: "_blank" do %>
-      <%= icon "eye" %>
-      <%= t(".visit") %>
-    <% end %>
-    <%= link_to edit_component_path, class: "button m-s" do %>
-      <%= icon "image" %>
-      <%= t(".embed") %>
-    <% end %>
-    <% unless current_peertube_user_valid? %>
-      <%= link_to new_peertube_session_path, class: "button m-s" do %>
-        <%= icon "person" %>
-        <%= t(".link_account") %>
+    <div class="pr-4">
+      <%= link_to main_component_path(current_component), class: "button button__sm button__secondary" do %>
+        <%= icon "eye-line" %>
+        <%= t(".visit") %>
       <% end %>
+    </div>
+    <div class="pr-4">
+      <%= link_to edit_component_path, class: "button button__sm button__secondary" do %>
+        <%= icon "image-line" %>
+        <%= t(".embed") %>
+      <% end %>
+    </div>
+    <% unless current_peertube_user_valid? %>
+      <div class="pr-4">
+        <%= link_to new_peertube_session_path, class: "button button__sm button__secondary" do %>
+          <%= icon "account-circle-line" %>
+          <%= t(".link_account") %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
@@ -30,15 +36,15 @@
       <h2 class="card-title">
         <%= t(".account") %>
       </h2>
-      <div class="button--title">
-        <%= link_to peertube_sessions_path, method: :delete, class: "button tiny" do %>
-          <%= icon "x" %>
+      <div class="button--title pt-4 pb-4">
+        <%= link_to peertube_sessions_path, method: :delete, class: "button button__sm button__secondary" do %>
+          <%= icon "close-circle-line" %>
           <%= t(".remove_account") %>
         <% end %>
       </div>
-      <div class="button--title">
-        <%= link_to new_peertube_session_path, class: "button tiny" do %>
-          <%= icon "person" %>
+      <div class="button--title pb-4">
+        <%= link_to new_peertube_session_path, class: "button button__sm button__secondary" do %>
+          <%= icon "account-circle-line" %>
           <%= t(".change_account") %>
         <% end %>
       </div>
