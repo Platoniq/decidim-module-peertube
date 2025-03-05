@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "decidim/peertube/test/shared_contexts"
+require 'cgi'
 
 describe "Visit the admin page", type: :system do
   include_context "with stubs example api"
@@ -102,6 +103,7 @@ describe "Visit the admin page", type: :system do
       let(:video_uuid) { "42-is-the-number" }
 
       let(:peertube_video) { Decidim::Peertube::PeertubeVideo.last }
+      let(:video_external_url) { "/link?external_url=#{CGI.escape("https://example.org/videos/watch/#{video_uuid}")}" }
 
       before do
         stub_api_request(method: :post, data: { "video" => { "uuid" => video_uuid } }, headers: headers)
@@ -123,7 +125,8 @@ describe "Visit the admin page", type: :system do
         expect(page).to have_content "Copy the Stream URL below"
         expect(page).to have_content "Don't share the Stream URL"
 
-        expect(page).to have_link "Watch in Peertube", href: "https://example.org/videos/watch/#{video_uuid}"
+        expect(page).to have_content "Don't share kjbkbhbjhbhjjhb Stream URL"
+        expect(page).to have_link "Watch in Peertube", href: video_external_url
         expect(page).to have_link "Embed this video in the component", href: select_peertube_video_path
         expect(page).to have_link "Delete", href: destroy_peertube_video_path
       end
@@ -153,7 +156,7 @@ describe "Visit the admin page", type: :system do
           click_link "Embed this video in the component"
         end
 
-        click_link "OK"
+        click_on "OK"
 
         visit main_component_path(component)
         expect(page.find("iframe")[:src]).to eq(other_embed_url)
@@ -168,7 +171,7 @@ describe "Visit the admin page", type: :system do
           click_link "Delete"
         end
 
-        click_link "OK"
+        click_on "OK"
 
         expect(page).not_to have_content video_url
         expect(Decidim::Peertube::PeertubeVideo.find_by(id: peertube_video.id)).to be_blank
