@@ -1,5 +1,7 @@
 # Decidim::Peertube
 
+[![Coverage Status](https://coveralls.io/repos/github/Platoniq/decidim-module-peertube/badge.svg?branch=main)](https://coveralls.io/github/Platoniq/decidim-module-peertube?branch=main)
+
 Peertube implementation for Decidim.
 
 ## Usage
