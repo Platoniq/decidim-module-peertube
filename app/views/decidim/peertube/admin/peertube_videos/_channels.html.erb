@@ -1,4 +1,4 @@
-<div class="table-scroll">
+<div class="table-scroll pt-2">
   <table class="table-list">
     <thead>
     <tr>
@@ -29,8 +29,8 @@
           <%= link_to channel["name"], channel["url"], target: "_blank" %>
         </td>
         <td>
-          <%= link_to new_peertube_video_path(id: channel["id"]), class: "button" do %>
-            <%= icon "rss-alt" %>
+          <%= link_to new_peertube_video_path(id: channel["id"]), class: "button button__sm button__secondary" do %>
+            <%= icon "broadcast-line" %>
             <%= t(".create_live_video") %>
           <% end %>
         </td>

@@ -2,13 +2,14 @@
 
 require "spec_helper"
 require "decidim/peertube/test/shared_contexts"
+require "cgi"
 
-describe "Visit the admin page", type: :system do
+describe "Visit the admin page" do
   include_context "with stubs example api"
   include_context "with an embed peertube_video component"
 
-  let(:organization) { create :organization }
-  let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:organization) { create(:organization) }
+  let!(:admin) { create(:user, :admin, :confirmed, organization:) }
 
   let(:edit_component_path) { Decidim::EngineRouter.admin_proxy(component.participatory_space).edit_component_path(component.id) }
   let(:new_peertube_session_path) { Decidim::EngineRouter.admin_proxy(component).new_peertube_session_path }
@@ -38,7 +39,7 @@ describe "Visit the admin page", type: :system do
     let(:username) { "test_username" }
     let(:password) { "test_password" }
     let(:http_method) { :post }
-    let(:params) { { grant_type: "password", response_type: "code", username: username, password: password } }
+    let(:params) { { grant_type: "password", response_type: "code", username:, password: } }
 
     let(:access_token) { "4cc3s-t0k3n" }
     let(:data) { { "expires_in" => 80_000, "access_token" => access_token } }
@@ -53,15 +54,15 @@ describe "Visit the admin page", type: :system do
     let(:user_data) { JSON.parse(file_fixture("peertube-user-data.json").read).merge("id" => peertube_uid) }
 
     before do
-      stub_api_request(method: :get, data: user_data, headers: headers)
-      stub_api_request(method: :post, data: data, headers: {})
-      click_link "Link Peertube account"
+      stub_api_request(method: :get, data: user_data, headers:)
+      stub_api_request(method: :post, data:, headers: {})
+      click_on "Link Peertube account"
     end
 
     it "can submit peertube credentials form" do
       fill_in "peertube_session[username]",	with: username
       fill_in "peertube_session[password]",	with: password
-      click_button "Link account"
+      click_on "Link account"
 
       expect(page).to have_content "Your Peertube account has been linked"
 
@@ -69,7 +70,7 @@ describe "Visit the admin page", type: :system do
       expect(peertube_user.peertube_uid).to eq(peertube_uid)
       expect(peertube_user.access_token).to eq(access_token)
 
-      expect(page).not_to have_link "Link Peertube account"
+      expect(page).to have_no_link "Link Peertube account"
       expect(page).to have_content "Your Peertube account"
 
       expect(page).to have_link "Unlink account", href: destroy_peertube_session_path
@@ -81,7 +82,7 @@ describe "Visit the admin page", type: :system do
   end
 
   describe "with linked peertube account" do
-    let!(:peertube_user) { create(:peertube_user, user: admin, access_token: access_token) }
+    let!(:peertube_user) { create(:peertube_user, user: admin, access_token:) }
     let(:access_token) { "4cc3s-t0k3n" }
 
     before do
@@ -102,10 +103,11 @@ describe "Visit the admin page", type: :system do
       let(:video_uuid) { "42-is-the-number" }
 
       let(:peertube_video) { Decidim::Peertube::PeertubeVideo.last }
+      let(:video_external_url) { "/link?external_url=#{CGI.escape("https://example.org/videos/watch/#{video_uuid}")}" }
 
       before do
-        stub_api_request(method: :post, data: { "video" => { "uuid" => video_uuid } }, headers: headers)
-        stub_api_request(method: :get, data: { "rtmpUrl" => rtmp_url, "streamKey" => stream_key }, headers: headers)
+        stub_api_request(method: :post, data: { "video" => { "uuid" => video_uuid } }, headers:)
+        stub_api_request(method: :get, data: { "rtmpUrl" => rtmp_url, "streamKey" => stream_key }, headers:)
         visit new_peertube_video_path
       end
 
@@ -114,7 +116,7 @@ describe "Visit the admin page", type: :system do
         fill_in "peertube_video[video_description]", with: "The video description is very short"
         select "Public", from: "peertube_video[privacy]"
 
-        click_button "Create live video"
+        click_on "Create live video"
 
         expect(page).to have_content "The live video has been created successfully"
         expect(page).to have_content "A new video"
@@ -123,7 +125,7 @@ describe "Visit the admin page", type: :system do
         expect(page).to have_content "Copy the Stream URL below"
         expect(page).to have_content "Don't share the Stream URL"
 
-        expect(page).to have_link "Watch in Peertube", href: "https://example.org/videos/watch/#{video_uuid}"
+        expect(page).to have_link "Watch in Peertube", href: video_external_url
         expect(page).to have_link "Embed this video in the component", href: select_peertube_video_path
         expect(page).to have_link "Delete", href: destroy_peertube_video_path
       end
@@ -134,11 +136,11 @@ describe "Visit the admin page", type: :system do
       let(:other_video_url) { "https://example.org/videos/watch/other-fake-video-url" }
       let(:embed_url) { "https://example.org/videos/embed/fake-video-url" }
       let(:other_embed_url) { "https://example.org/videos/embed/other-fake-video-url" }
-      let!(:peertube_video) { create(:peertube_video, component: component, peertube_user: peertube_user, video_url: video_url) }
-      let!(:other_peertube_video) { create(:peertube_video, component: component, peertube_user: peertube_user, video_url: other_video_url) }
+      let!(:peertube_video) { create(:peertube_video, component:, peertube_user:, video_url:) }
+      let!(:other_peertube_video) { create(:peertube_video, component:, peertube_user:, video_url: other_video_url) }
 
       before do
-        stub_api_request(method: :delete, data: {}, headers: headers)
+        stub_api_request(method: :delete, data: {}, headers:)
       end
 
       it "allows to select a live video and embed it in public component" do
@@ -150,10 +152,10 @@ describe "Visit the admin page", type: :system do
         visit manage_component_path(component)
 
         within ".card:nth-child(2) tbody tr:last-child" do
-          click_link "Embed this video in the component"
+          click_on "Embed this video in the component"
         end
 
-        click_link "OK"
+        click_on "OK"
 
         visit main_component_path(component)
         expect(page.find("iframe")[:src]).to eq(other_embed_url)
@@ -165,18 +167,18 @@ describe "Visit the admin page", type: :system do
         expect(page).to have_content video_url
 
         within ".card:nth-child(2) tbody tr:first-child" do
-          click_link "Delete"
+          click_on "Delete"
         end
 
-        click_link "OK"
+        click_on "OK"
 
-        expect(page).not_to have_content video_url
+        expect(page).to have_no_content video_url
         expect(Decidim::Peertube::PeertubeVideo.find_by(id: peertube_video.id)).to be_blank
       end
     end
 
     it "allows changing peertube account" do
-      click_link "Change account"
+      click_on "Change account"
 
       expect(page).to have_content "Link Peertube account"
       expect(page).to have_content "Peertube username or email"
@@ -185,9 +187,9 @@ describe "Visit the admin page", type: :system do
     it "allows unlinking peertube account" do
       expect(page).to have_content(peertube_user.peertube_username)
 
-      click_link "Unlink account"
+      click_on "Unlink account"
 
-      expect(page).not_to have_content(peertube_user.peertube_username)
+      expect(page).to have_no_content(peertube_user.peertube_username)
       expect(Decidim::Peertube::PeertubeUser.find_by(id: peertube_user.id)).to be_blank
     end
   end

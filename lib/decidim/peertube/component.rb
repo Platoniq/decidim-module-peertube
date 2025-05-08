@@ -28,7 +28,7 @@ Decidim.register_component(:peertube_video) do |component|
       name: Decidim::Components::Namer.new(participatory_space.organization.available_locales, :peertube_video).i18n_name,
       manifest_name: :peertube_video,
       published_at: Time.current,
-      participatory_space: participatory_space
+      participatory_space:
     }
 
     component = Decidim.traceability.perform_action!(

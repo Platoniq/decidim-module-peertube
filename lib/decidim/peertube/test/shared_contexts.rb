@@ -12,12 +12,12 @@ shared_context "with stubs example api" do
     allow(Decidim::Peertube).to receive(:host).and_return(base_url)
     allow(Decidim::Peertube::Api).to receive(:base_url).and_return(api_url)
     stub_request(http_method, /api\.example\.org/)
-      .to_return(status: http_status, body: data.to_json, headers: headers)
+      .to_return(status: http_status, body: data.to_json, headers:)
   end
 
   def stub_api_request(method: :get, data: {}, headers: {}, status: 200)
     stub_request(method, /api\.example\.org/)
-      .to_return(status: status, body: data.to_json, headers: headers)
+      .to_return(status:, body: data.to_json, headers:)
   end
 end
 
@@ -36,8 +36,8 @@ shared_context "with an embed peertube_video component" do
 
     let(:settings) do
       {
-        title: title,
-        video_url: video_url
+        title:,
+        video_url:
       }
     end
 
@@ -54,12 +54,12 @@ shared_context "with a live peertube_video component" do
   include_context "with a component" do
     let(:manifest_name) { "peertube_video" }
     let(:title) { "A Peertube video" }
-    let(:peertube_user) { create(:peertube_user, user: user) }
-    let(:peertube_video) { create(:peertube_video, user: peertube_user, component: component) }
+    let(:peertube_user) { create(:peertube_user, user:) }
+    let(:peertube_video) { create(:peertube_video, user: peertube_user, component:) }
 
     let(:settings) do
       {
-        title: title
+        title:
       }
     end
 
