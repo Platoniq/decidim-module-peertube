@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateDecidimPeertubeVideos < ActiveRecord::Migration[5.2]
+class CreateDecidimPeertubeVideos < ActiveRecord::Migration[7.0]
   def change
     create_table :decidim_peertube_videos do |t|
       t.references :decidim_component, foreign_key: { to_table: :decidim_components }, index: { name: "index_decidim_peertube_videos_on_component" }

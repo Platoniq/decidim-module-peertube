@@ -7,7 +7,8 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 3.1.1
+  RUBY_VERSION: 3.3.4
+  NODE_VERSION: 22.14.x
 
 jobs:
   test-report:
@@ -15,7 +16,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:13
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -31,7 +32,7 @@ jobs:
       COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
@@ -40,7 +41,7 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
 

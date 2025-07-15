@@ -10,6 +10,14 @@ module Decidim
       def access_token_valid?
         access_token.present? && access_token_expires_at.future?
       end
+
+      def self.ransackable_attributes(_auth_object = nil)
+        %w(id created_at updated_at)
+      end
+
+      def self.ransackable_associations(_auth_object = nil)
+        %w(user)
+      end
     end
   end
 end
