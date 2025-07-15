@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["alejandro.puerta@nazaries.com"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/decidim/decidim-module-peertube"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.2.2"
 
   s.name = "decidim-peertube"
   s.summary = "A decidim peertube module"
