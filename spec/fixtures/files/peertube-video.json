@@ -43,8 +43,8 @@
     "privacy": 1,
     "updateAt": "2019-08-24"
   },
-  "blocklisted": true,
-  "blocklistedReason": "string",
+  "blacklisted": true,
+  "blacklistedReason": "string",
   "account": {
     "id": 42,
     "name": "chocobozzz",
