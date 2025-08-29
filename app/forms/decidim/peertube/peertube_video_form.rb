@@ -19,7 +19,7 @@ module Decidim
 
       validates :channel_id, :video_name, :video_description, :privacy, presence: true
       validates :video_name, length: { in: 3..120 }
-      validates :privacy, numericality: { only_integer: true, in: [1..2] } # 1: Public, 2: Unlisted
+      validates :privacy, numericality: { only_integer: true, in: 1..2 }
 
       # FUTURE
       # validates_upload :preview_file
