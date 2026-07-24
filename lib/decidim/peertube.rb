@@ -8,21 +8,22 @@ require "decidim/peertube/component"
 
 module Decidim
   module Peertube
-    include ActiveSupport::Configurable
+    class << self
+      def config = self
 
-    def self.url(path)
-      URI.join("https://#{Decidim::Peertube.host}", path).to_s
+      def configure
+        yield self
+      end
+
+      def url(path)
+        URI.join("https://#{Decidim::Peertube.host}", path).to_s
+      end
     end
 
-    config_accessor :credentials do
-      {
-        client_id: ENV.fetch("PEERTUBE_CLIENT_ID", "fake-peertube-client-id"),
-        client_secret: ENV.fetch("PEERTUBE_CLIENT_SECRET", "fake-peertube-client-secret")
-      }
-    end
-
-    config_accessor :host do
-      ENV.fetch("PEERTUBE_HOST", "peertube.plataformess.org")
-    end
+    mattr_accessor :credentials, default: {
+      client_id: ENV.fetch("PEERTUBE_CLIENT_ID", "fake-peertube-client-id"),
+      client_secret: ENV.fetch("PEERTUBE_CLIENT_SECRET", "fake-peertube-client-secret")
+    }
+    mattr_accessor :host, default: ENV.fetch("PEERTUBE_HOST", "peertube.plataformess.org")
   end
 end
