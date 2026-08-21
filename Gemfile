@@ -11,6 +11,7 @@ require_relative "#{base_path}lib/decidim/peertube/version"
 DECIDIM_VERSION = Decidim::Peertube::DECIDIM_VERSION
 
 gem "decidim", DECIDIM_VERSION
+gem "decidim-initiatives", DECIDIM_VERSION
 gem "decidim-peertube", path: "."
 
 gem "bootsnap", "~> 1.4"

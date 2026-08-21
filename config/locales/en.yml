@@ -14,6 +14,8 @@ en:
           create:
             invalid: There was a problem linking your Peertube account
             success: Your Peertube account has been linked successfully
+          destroy:
+            success: Your Peertube account has been unlinked
           new:
             password: Peertube password
             submit: Link account

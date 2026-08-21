@@ -14,6 +14,8 @@ ca:
           create:
             invalid: No s'ha pogut enllaçar el teu compte de Peertube
             success: S'ha enllaçat el teu compte de Peertube
+          destroy:
+            success: S'ha desenllaçat el teu compte de Peertube
           new:
             password: Contrassenya (de Peertube)
             submit: Enllaça el compte
