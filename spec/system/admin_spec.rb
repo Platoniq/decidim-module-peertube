@@ -157,6 +157,9 @@ describe "Visit the admin page" do
 
         click_on "OK"
 
+        # wait for the selection to be saved before leaving the page
+        expect(page).to have_content "The selected video will now be embedded in the public component"
+
         visit main_component_path(component)
         expect(page.find("iframe")[:src]).to eq(other_embed_url)
       end
@@ -178,6 +181,7 @@ describe "Visit the admin page" do
     end
 
     it "allows changing peertube account" do
+      expect(page).to have_link "Change account"
       click_on "Change account"
 
       expect(page).to have_content "Link Peertube account"
