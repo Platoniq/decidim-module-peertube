@@ -17,7 +17,7 @@ module Decidim
         end
 
         def current_peertube_user
-          Decidim::Peertube::PeertubeUser.find_by(user: current_user)
+          Decidim::Peertube::PeertubeUser.find_by(user: current_user) # rubocop:disable Decidim/OrganizationScopedFinder -- scoped to the signed-in user
         end
 
         def check_peertube_session
