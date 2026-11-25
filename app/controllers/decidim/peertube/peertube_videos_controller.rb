@@ -5,7 +5,8 @@ module Decidim
     class PeertubeVideosController < Decidim::Components::BaseController
       helper PeertubeHelper
 
-      def show; end
+      # Decidim::Components::BaseController checks the read permission on the component
+      def show; end # rubocop:disable Decidim/EnforcePermissionTo
     end
   end
 end

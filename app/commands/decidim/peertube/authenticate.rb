@@ -35,7 +35,8 @@ module Decidim
       def authenticate!
         authentication_request = Decidim::Peertube::Api::AuthenticationRequest.new(username: form.username, password: form.password)
 
-        @peertube_user = Decidim::Peertube::PeertubeUser.find_or_create_by(user: current_user)
+        # scoped to the signed-in user
+        @peertube_user = Decidim::Peertube::PeertubeUser.find_or_create_by(user: current_user) # rubocop:disable Decidim/OrganizationScopedFinder
 
         @peertube_user.update!(
           peertube_username: form.username,

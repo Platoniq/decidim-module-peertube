@@ -6,6 +6,9 @@ module Decidim
       class PeertubeSessionsController < Decidim::Admin::Components::BaseController
         include HasPeertubeSession
 
+        # Every action is authorized by Decidim::Admin::Components::BaseController#enforce_component_permissions
+        # (manage permission on the component, read for index and show), which this cop cannot see.
+        # rubocop:disable Decidim/EnforcePermissionTo
         def new
           # enforce_permission_to :create, :peertube_session
 
@@ -39,6 +42,7 @@ module Decidim
 
           redirect_to root_path
         end
+        # rubocop:enable Decidim/EnforcePermissionTo
       end
     end
   end
