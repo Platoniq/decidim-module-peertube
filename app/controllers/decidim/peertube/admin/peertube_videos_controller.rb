@@ -5,12 +5,16 @@ module Decidim
     module Admin
       class PeertubeVideosController < Decidim::Admin::Components::BaseController
         include HasPeertubeSession
+
         helper PeertubeHelper
 
         helper_method :peertube_videos
 
         before_action :check_peertube_session, only: [:new, :create]
 
+        # Every action is authorized by Decidim::Admin::Components::BaseController#enforce_component_permissions
+        # (manage permission on the component, read for index and show), which this cop cannot see.
+        # rubocop:disable Decidim/EnforcePermissionTo
         def show
           # enforce_permission_to :show, :peertube_video
         end
@@ -63,6 +67,7 @@ module Decidim
             end
           end
         end
+        # rubocop:enable Decidim/EnforcePermissionTo
 
         private
 
@@ -71,7 +76,7 @@ module Decidim
         end
 
         def peertube_video
-          @peertube_video ||= Decidim::Peertube::PeertubeVideo.find_by(id: params[:id])
+          @peertube_video ||= peertube_videos.find_by(id: params[:id])
         end
       end
     end
